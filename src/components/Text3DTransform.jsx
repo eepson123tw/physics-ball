@@ -43,15 +43,17 @@ export default function Text3DTransform({
 
   return (
     <>
-      <Environment resolution={32}>
+      <Environment near={1} far={1000} resolution={10}>
         <group rotation={[-Math.PI / 4, -0.3, 0]}>
           <Lightformer
+            form='rect'
             intensity={20}
             rotation-x={Math.PI / 2}
             position={[0, 5, -9]}
             scale={[10, 10, 1]}
           />
           <Lightformer
+            form='rect'
             intensity={2}
             rotation-y={Math.PI / 2}
             position={[-5, 1, -1]}
@@ -79,24 +81,24 @@ export default function Text3DTransform({
         </group>
       </Environment>
 
-      <Center scale={[0.8, 1, 1]} front top>
-        <Text3D
-          position={[0, 5, 0]}
-          castShadow
-          bevelEnabled
-          scale={0.5}
-          font={font}
-          letterSpacing={-0.03}
-          height={0.25}
-          bevelSize={0.01}
-          bevelSegments={10}
-          curveSegments={128}
-          bevelThickness={0.01}
-        >
-          {showWinner ? getText(props.active) : 'Who treats ?'}
-          <MeshTransmissionMaterial background={texture} />
-        </Text3D>
-      </Center>
+      {/* <Center scale={[0.8, 1, 1]} front> */}
+      <Text3D
+        position={[-2, 1, 0]}
+        castShadow
+        bevelEnabled
+        scale={0.5}
+        font={font}
+        letterSpacing={-0.03}
+        height={0.25}
+        bevelSize={0.01}
+        bevelSegments={10}
+        curveSegments={128}
+        bevelThickness={0.01}
+      >
+        {showWinner ? getText(props.active) : 'Who treats ?'}
+        <MeshTransmissionMaterial background={texture} />
+      </Text3D>
+      {/* </Center> */}
     </>
   )
 }

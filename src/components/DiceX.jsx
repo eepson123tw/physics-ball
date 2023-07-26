@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import React, { useRef } from 'react'
-import { RigidBody, CuboidCollider } from '@react-three/rapier'
+import React, { useRef, useMemo } from 'react'
+import { RigidBody, InstancedRigidBodies } from '@react-three/rapier'
 import { RenderTexture, Text, PerspectiveCamera } from '@react-three/drei'
 export default function DiceX(props) {
   const cube = useRef()
@@ -10,14 +10,32 @@ export default function DiceX(props) {
     // cube.current.applyImpulse({ x: 0, y: 1, z: 0 })
     cube.current.applyTorqueImpulse({ x: 1, y: 1, z: 1 })
   }
+  const cubesCount = 125
+  const instances = useMemo(() => {
+    const instances = []
+    for (let i = 0; i < cubesCount; i++) {
+      instances.push({
+        key: 'instance_' + i,
+        position: [
+          (Math.random() - 0.5) * 8,
+          6 + i * 0.2,
+          (Math.random() - 0.5) * 8
+        ],
+        rotation: [Math.random(), Math.random(), Math.random()]
+      })
+    }
+    return instances
+  }, [])
   return (
     <>
-      <RigidBody onClick={cubeJump} ref={cube} colliders='cuboid' mass={0.5}>
-        <mesh
-          castShadow
-          position={[(Math.random() - 0.5) * 4, 4, (Math.random() - 0.5) * 4]}
-          scale={0.5}
-        >
+      <InstancedRigidBodies
+        instances={instances}
+        onClick={cubeJump}
+        ref={cube}
+        colliders='cuboid'
+        scale={0.3}
+      >
+        <instancedMesh castShadow receiveShadow args={[null, null, cubesCount]}>
           <boxGeometry />
           <meshStandardMaterial toneMapped={false}>
             <RenderTexture
@@ -36,8 +54,8 @@ export default function DiceX(props) {
                 attach='background'
                 args={
                   !props.active
-                    ? [3 * Math.random(), 3 * Math.random(), 3 * Math.random()]
-                    : [10, 10, 50]
+                    ? [1 * Math.random(), 2 * Math.random(), 3 * Math.random()]
+                    : [1, 1, 1]
                 }
               />
               <ambientLight intensity={0.5} />
@@ -47,8 +65,8 @@ export default function DiceX(props) {
               </Text>
             </RenderTexture>
           </meshStandardMaterial>
-        </mesh>
-      </RigidBody>
+        </instancedMesh>
+      </InstancedRigidBodies>
     </>
   )
 }
