@@ -3,7 +3,7 @@
 import React, { useRef } from 'react'
 import { RigidBody, CuboidCollider } from '@react-three/rapier'
 import { RenderTexture, Text, PerspectiveCamera } from '@react-three/drei'
-export default function Dice(props) {
+export default function DiceX(props) {
   const cube = useRef()
   const cubeJump = () => {
     // const mass = cube.current.mass()

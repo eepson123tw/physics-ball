@@ -1,31 +1,13 @@
 // @ts-nocheck
-import {
-  OrbitControls,
-  RenderTexture,
-  Text,
-  PerspectiveCamera,
-  Environment,
-  Center,
-  AccumulativeShadows,
-  RandomizedLight
-} from '@react-three/drei'
+import { OrbitControls, Center } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import {
-  InstancedRigidBodies,
-  CuboidCollider,
-  BallCollider,
-  CylinderCollider,
-  RigidBody,
-  Physics
-} from '@react-three/rapier'
-import { useFrame } from '@react-three/fiber'
-import { useRef, useState, useEffect, useMemo } from 'react'
+import { CuboidCollider, RigidBody, Physics } from '@react-three/rapier'
 import * as THREE from 'three'
 import { useControls, button } from 'leva'
 import Plane from './components/Plane'
-import Dice from './components/dice'
+import DiceX from './components/DiceX'
 import Text3DTransform from './components/Text3DTransform'
 
 export default function PhysicsY() {
@@ -144,37 +126,37 @@ export default function PhysicsY() {
         <color attach='background' args={['#000']} />
         <group position={[0, -0.75, 0]}>
           <Center top>
-            <Dice
+            <DiceX
               text={diceOne.text}
               color={diceOne.color}
               active={active === 1 ? true : false}
             />
-            <Dice
+            <DiceX
               text={diceTwo.text}
               color={diceTwo.color}
               active={active === 2 ? true : false}
             />
-            <Dice
+            <DiceX
               text={diceThree.text}
               color={diceThree.color}
               active={active === 3 ? true : false}
             />
-            <Dice
+            <DiceX
               text={diceFour.text}
               color={diceFour.color}
               active={active === 4 ? true : false}
             />
-            <Dice
+            <DiceX
               text={diceFive.text}
               color={diceFive.color}
               active={active === 5 ? true : false}
             />
-            <Dice
+            <DiceX
               text={diceSix.text}
               color={diceSix.color}
               active={active === 6 ? true : false}
             />
-            <Dice
+            <DiceX
               text={diceSeven.text}
               color={diceSeven.color}
               active={active === 7 ? true : false}
