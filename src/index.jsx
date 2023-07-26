@@ -2,20 +2,23 @@
 import './style.css'
 import ReactDOM from 'react-dom/client'
 import { Canvas } from '@react-three/fiber'
-import PhysicsX from './PhysicsX.jsx'
+import PhysicsY from './PhysicsY.jsx'
 import React from 'react'
 const root = ReactDOM.createRoot(document.querySelector('#root'))
-
 root.render(
   <Canvas
     shadows
+    gl={{
+      antialias: false,
+      preserveDrawingBuffer: true,
+      alpha: true,
+      autoClearColor: true
+    }}
     camera={{
       fov: 45,
-      near: 0.1,
-      far: 200,
-      position: [4, 2, 6]
+      position: [5, 5, 8]
     }}
   >
-    <PhysicsX />
+    <PhysicsY />
   </Canvas>
 )
